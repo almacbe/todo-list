@@ -2,18 +2,6 @@ var TaskList = function() {
 
 		var taskList = [];
 
-		var postMessage = function (url, callback, msg){
-			var request = new XMLHttpRequest();
-			request.open("GET", url);
-
-			request.onreadystatechange = function (){
-				if(request.readyState === 4 && request.status === 200){
-					callback(request.responseText);
-				}
-			};
-			request.setRequestHeader("Content-Type", "application/json");
-			request.send(msg);
-		}
 
 		this.send = function(task){
 			var message = JSON.stringify({task: task.toObject()}); 
@@ -36,7 +24,7 @@ var TaskList = function() {
 		this.add = function(text) {
 				var task = new Task(text);
 				taskList.push(task);
-				this.send(task);
+				//this.send(task);
 				return task;
 			};
 
@@ -56,6 +44,14 @@ var TaskList = function() {
 				iterate(function(task) {
 					if (task.hasText(text)) {
 						task.doTask();
+					}
+				});
+			};
+
+		this.undoTask = function(text) {
+				iterate(function(task) {
+					if (task.hasText(text)) {
+						task.undo();
 					}
 				});
 			};
