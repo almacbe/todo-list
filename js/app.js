@@ -112,7 +112,7 @@
 
 	var _updateTodoCountButton = function (number){
 		var todoCount = document.getElementById('todo-count');
-		
+
 		if (number === 1) {
 			todoCount.innerHTML = '<strong>' + number + '</strong> item left';	
 		}else if (number >= 1) {
@@ -125,7 +125,33 @@
 	var _updateClearCompletedButton = function (number){
 		var clearCompleted = document.getElementById('clear-completed');
 		
-		clearCompleted.innerHTML = 'Clear completed (' + number + ')';			
+		if(number > 0){
+			if( clearCompleted === null){
+					clearCompleted = _createClearCompletedButton();
+			}
+
+			clearCompleted.innerHTML = 'Clear completed (' + number + ')';
+		}else if(number === 0){
+			if(clearCompleted !== null){
+				clearCompleted.parentNode.removeChild(clearCompleted);
+			}
+		}
+	}
+
+	var _createClearCompletedButton = function (){
+		button = document.createElement('button');
+		button.id='clear-completed';
+
+		button.addEventListener('click', _cleanCompletedTask);
+
+		var footer = document.getElementById('footer');
+		footer.appendChild(button);
+
+		return button;
+	}
+
+	var _cleanCompletedTask = function(){
+		// TODO: Acabar metodo
 	}
 
 	var _createDeleteButton = function(){
