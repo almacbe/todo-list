@@ -40,6 +40,14 @@ var TaskList = function() {
 				taskList.splice(selected, 1);
 			};
 
+		this.replace = function(oldText, newText){
+			iterate(function(task){
+				if (task.hasText(oldText)) {
+						task.text = newText;
+					}
+			});
+		};
+
 		this.doTask = function(text) {
 				iterate(function(task) {
 					if (task.hasText(text)) {
@@ -101,7 +109,6 @@ var TaskList = function() {
 					operation(taskList[i], i);
 				}
 			};
-		
 	};
 
 var aTaskList = new TaskList();

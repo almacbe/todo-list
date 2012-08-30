@@ -30,17 +30,17 @@
 		var view = _createView(task.text);
 		var input = _createInput(task.text);
 		input.addEventListener('blur', function(event){
-			var item = this.parentNode;
-			
+			var item = this.parentNode;			
 			if(item.className === "")
+				return;
 
-			var label = item.getElementByTagName('div').getElementByTagName('label');
-			
+			var div = item.getElementsByTagName('div')[0];	
+			var label = div.getElementsByTagName('label')[0];
 			if(this.value != ''){
 				taskList.replace(label.innerHTML, this.value);
 				label.innerHTML = this.value;
 				this.value = this.value;
-
+				item.className = '';
 			}
 		});
 
