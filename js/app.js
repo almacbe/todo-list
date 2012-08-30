@@ -6,20 +6,43 @@
 
 	newTask.addEventListener('blur', function(event){
 		if(this.value != ''){
-			var task = taskList.add(this.value);
-			displayTask(task);
+			addAndDisplayTask(this.value);
 			this.value = '';
-			_updateItemsLefts();
 		}
 	});
+
+	var addAndDisplayTask = function(text){
+		var task = taskList.add(text);
+		displayTask(task);
+		_updateItemsLefts();
+	}
 
 	var displayTask = function(task){
 		var todolist  = document.getElementById('todo-list');
 
 		var listItem = document.createElement('li');
 
+		listItem.addEventListener("dblclick",function(e){
+			this.className = "editing";
+			//console.log(this);
+		});
+
 		var view = _createView(task.text);
 		var input = _createInput(task.text);
+		input.addEventListener('blur', function(event){
+			var item = this.parentNode;
+			
+			if(item.className === "")
+
+			var label = item.getElementByTagName('div').getElementByTagName('label');
+			
+			if(this.value != ''){
+				taskList.replace(label.innerHTML, this.value);
+				label.innerHTML = this.value;
+				this.value = this.value;
+
+			}
+		});
 
 		listItem.appendChild(view);
 		listItem.appendChild(input);

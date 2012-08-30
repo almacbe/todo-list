@@ -89,7 +89,7 @@ var TaskList = function() {
 				var textToPrint = '';
 
 				iterate(function(task) {
-					textToPrint += task.toString();
+					textToPrint += task.toString() + " ";
 				});
 
 				console.log(textToPrint);
