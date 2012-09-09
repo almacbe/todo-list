@@ -7,7 +7,7 @@ var TaskList = function() {
 			var message = JSON.stringify({task: task.toObject()}); 
 
 			var request = new XMLHttpRequest();
-			request.open("POST", 'http://192.168.1.55:3000', true);
+			request.open("POST", 'http://127.0.0.1.:3000', true);
 
 			request.onreadystatechange = function (){
 				if(request.readyState === 4 && request.status === 200){
@@ -24,7 +24,7 @@ var TaskList = function() {
 		this.add = function(text) {
 				var task = new Task(text);
 				taskList.push(task);
-				//this.send(task);
+				this.send(task);
 				return task;
 			};
 
