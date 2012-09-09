@@ -151,7 +151,16 @@
 	}
 
 	var _cleanCompletedTask = function(){
-		// TODO: Acabar metodo
+		var todos = document.getElementById('todo-list');
+		var completedTodos = todos.getElementsByClassName('completed');
+		for (var i = completedTodos.length - 1; i >= 0; i--) {
+			var div = completedTodos[i].getElementsByTagName('div')[0];
+			var label = div.getElementsByTagName('label')[0]; 
+			var text = label.innerHTML;
+			completedTodos[i].parentNode.removeChild(completedTodos[i]);
+			taskList.remove(text);
+		};
+		_updateClearCompletedButton(0);
 	}
 
 	var _createDeleteButton = function(){
